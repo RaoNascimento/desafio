@@ -1,6 +1,6 @@
 package br.com.codenation.desafio.Domain;
 
-public class CifraModelo {
+public class Cifra {
 
 	private int numeroCasas;
 	private String token;

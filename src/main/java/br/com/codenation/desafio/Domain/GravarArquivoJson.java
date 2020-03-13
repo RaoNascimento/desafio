@@ -10,10 +10,10 @@ public class GravarArquivoJson {
 	static String MSG_ERRO_JSON = "ERRO ao gravar arquivo JSON ";
 	static String NOME_ARQUIVO = "answer.json";
 
-	public void gravarArquivoJson(CifraModelo arquivoDesafio) {
+	public void gravarArquivoJson(Cifra objAnswer) {
 
 		Gson gson = new Gson();
-		String json = gson.toJson(arquivoDesafio);
+		String json = gson.toJson(objAnswer);
 
 		try {
 			FileWriter writeFile = new FileWriter(NOME_ARQUIVO);
