@@ -21,7 +21,6 @@ public class DesafioServiceImpl implements DesafioService {
 	RestTemplate template;
 	
 	static String TOKEN = "239977e176f146a1414f17ae145b090bd072b168";
-	//static String TOKEN = "6db25cf8b7c9430b108cc9f9d20e4354cc00276b";
 	static String URL = "api.codenation.dev/v1/challenge/dev-ps/generate-data?token=";
 	static String FALHA_CONEXAO = "Conexão api Codenation falhou - ";
 	static String ERRO_RESUMO = "Não foi possível gerar resumo do texto " ;
@@ -35,7 +34,6 @@ public class DesafioServiceImpl implements DesafioService {
 		UriComponents uri = UriComponentsBuilder.newInstance().scheme("https")
 				.host(URL+TOKEN).build();	
 		 obj = template.getForEntity(uri.toUriString(), Cifra.class);
-		 System.out.println(" CASAS: "+obj.getBody().getNumeroCasas());
 		 	
 		}catch(ResourceAccessException e) {
 			System.out.println(FALHA_CONEXAO + e.getMessage().toString());		
@@ -50,7 +48,6 @@ public class DesafioServiceImpl implements DesafioService {
 		String textoDecifrado = decifraTexto.decifrarCesar(obj.getBody().getCifrado().toLowerCase(), obj.getBody().getNumeroCasas());	
 		
 		obj.getBody().setDecifrado(textoDecifrado);
-		//obj.getBody().setNumeroCasas(decifraTexto.contadorCasas());
 		
 		try {
 			ResumoSHA1 resumo = new ResumoSHA1();

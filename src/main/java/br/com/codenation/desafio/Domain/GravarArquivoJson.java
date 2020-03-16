@@ -19,9 +19,9 @@ public class GravarArquivoJson {
 			FileWriter writeFile = new FileWriter(NOME_ARQUIVO);
 			writeFile.write(json);
 			writeFile.close();
+			
 		} catch (IOException e) {
 			System.out.println(MSG_ERRO_JSON + e.getMessage().toString());
-		}
-		
+		}	
 	}
 }
