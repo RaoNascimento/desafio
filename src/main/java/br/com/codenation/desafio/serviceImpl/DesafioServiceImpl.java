@@ -14,8 +14,6 @@ import br.com.codenation.desafio.Domain.GravarArquivoJson;
 import br.com.codenation.desafio.Domain.ResumoSHA1;
 import br.com.codenation.desafio.service.DesafioService;
 
-
-
 @Service
 public class DesafioServiceImpl implements DesafioService {
 	
@@ -23,48 +21,49 @@ public class DesafioServiceImpl implements DesafioService {
 	RestTemplate template;
 	
 	static String TOKEN = "239977e176f146a1414f17ae145b090bd072b168";
+	//static String TOKEN = "6db25cf8b7c9430b108cc9f9d20e4354cc00276b";
 	static String URL = "api.codenation.dev/v1/challenge/dev-ps/generate-data?token=";
 	static String FALHA_CONEXAO = "Conexão api Codenation falhou - ";
 	static String ERRO_RESUMO = "Não foi possível gerar resumo do texto " ;
 	
 	@Override
-	public ResponseEntity<Cifra> getTextoCodificadoApi() {
+	public ResponseEntity<Cifra> getObjCodificadoApi() {
 		
-		ResponseEntity<Cifra> entidadeCifraModelo = null;
+		ResponseEntity<Cifra> obj = null;
 
 		try {
 		UriComponents uri = UriComponentsBuilder.newInstance().scheme("https")
 				.host(URL+TOKEN).build();	
-			entidadeCifraModelo = template.getForEntity(uri.toUriString(), Cifra.class);
-			
+		 obj = template.getForEntity(uri.toUriString(), Cifra.class);
+		 System.out.println(" CASAS: "+obj.getBody().getNumeroCasas());
+		 	
 		}catch(ResourceAccessException e) {
 			System.out.println(FALHA_CONEXAO + e.getMessage().toString());		
 		}
 	
-		return entidadeCifraModelo;
+		return  obj;
 	}
-	public ResponseEntity<Cifra> inserirNovosDados(ResponseEntity<Cifra> objAnswer){
+	public ResponseEntity<Cifra> inserirNovosDados(ResponseEntity<Cifra> obj){
 		
 		DecifraTexto decifraTexto = new DecifraTexto();
 		decifraTexto.zeraContador();
-		String textoDecifrado = decifraTexto.decifrarCesar(objAnswer.getBody().getCifrado());	
+		String textoDecifrado = decifraTexto.decifrarCesar(obj.getBody().getCifrado().toLowerCase(), obj.getBody().getNumeroCasas());	
 		
-		objAnswer.getBody().setDecifrado(textoDecifrado);
-		objAnswer.getBody().setNumeroCasas(decifraTexto.contadorCasas());
+		obj.getBody().setDecifrado(textoDecifrado);
+		//obj.getBody().setNumeroCasas(decifraTexto.contadorCasas());
 		
 		try {
 			ResumoSHA1 resumo = new ResumoSHA1();
-			objAnswer.getBody().setResumoCriptografico(resumo.resumirTextoDecifrado(textoDecifrado));
+			obj.getBody().setResumoCriptografico(resumo.resumirTextoDecifrado(textoDecifrado));
 			
 		} catch (Exception e) { 
 			System.out.println(ERRO_RESUMO + e.getMessage().toString());	 
 		}
 		
 		GravarArquivoJson gravarArquivoJson = new GravarArquivoJson();
-		gravarArquivoJson.gravarArquivoJson(objAnswer.getBody());
-		
-		
-		return objAnswer;
+		gravarArquivoJson.gravarArquivoJson(obj.getBody());
+				
+		return obj;
 		
 	}
 }
