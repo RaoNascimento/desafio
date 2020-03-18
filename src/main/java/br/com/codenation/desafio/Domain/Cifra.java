@@ -3,19 +3,14 @@ package br.com.codenation.desafio.Domain;
 
 public class Cifra {
 
-	//@JsonProperty("numero_casas")
 	private int numero_casas;
-	
-	//@JsonProperty("token")
+
 	private String token;
 	
-	//@JsonProperty("cifrado")
 	private String cifrado;
 	
-	//@JsonProperty("decifrado")
 	private String decifrado;
 	
-	//@JsonProperty("resumo_criptografico")
 	private String resumo_criptografico;
 
 	public int getNumero_casas() {

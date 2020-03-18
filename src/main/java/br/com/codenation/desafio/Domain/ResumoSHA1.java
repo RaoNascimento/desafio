@@ -1,30 +1,31 @@
 package br.com.codenation.desafio.Domain;
 
-import java.io.UnsupportedEncodingException;
+import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class ResumoSHA1 {
 	
 	static String ERRO_SHA1 = " ERRO AO GERAR SHA-1";
-	
+
 	public String resumirTextoDecifrado(String textoDecifrado) throws NoSuchAlgorithmException { 
-	MessageDigest algoritmo = MessageDigest.getInstance("SHA-1");
-	 StringBuilder resumoBuilder = null;
-	
-	 try {
-		byte arrayGerado[] = algoritmo.digest(textoDecifrado.getBytes("UTF-8"));
-		 resumoBuilder = new StringBuilder();
-		 
-		 for (byte let :  arrayGerado) {
-	         resumoBuilder.append(String.format("%02X", 0xFF & let));
-	       }
-				
-	} catch (UnsupportedEncodingException e) {
-
-		System.out.println(ERRO_SHA1 + e.getMessage().toString());
+		try {  
+            MessageDigest md = MessageDigest.getInstance("SHA-1"); 
+            byte[] messageDigest = md.digest(textoDecifrado.getBytes()); 
+ 
+            BigInteger no = new BigInteger(1, messageDigest); 
+            String hashtext = no.toString(16); 
+            
+            while (hashtext.length() < 32) { 
+                hashtext = "0" + hashtext; 
+            } 
+ 
+            return hashtext; 
+		}
+        catch (NoSuchAlgorithmException e) { 
+        	System.out.println(ERRO_SHA1 + e.getMessage().toString());
+            throw new RuntimeException(e); 
+        } 
+        
 	}
-	 return resumoBuilder.toString();
-	}
-
 }

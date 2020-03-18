@@ -8,6 +8,6 @@ public interface DesafioService {
 
 	public ResponseEntity<Cifra> getObjCodificadoApi();
 	public ResponseEntity<Cifra>inserirNovosDados(ResponseEntity<Cifra> objAnswer);
-	public  ResponseEntity<Cifra> postarArquivo();
+	public  ResponseEntity<String> postarArquivo();
 
 }

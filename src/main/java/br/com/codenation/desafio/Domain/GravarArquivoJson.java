@@ -2,10 +2,6 @@ package br.com.codenation.desafio.Domain;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.ByteBuffer;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
 import com.google.gson.Gson;
 
@@ -27,11 +23,5 @@ public class GravarArquivoJson {
 		} catch (IOException e) {
 			System.out.println(MSG_ERRO_JSON + e.getMessage().toString());
 		}	
-	}
-	public byte[] readFile(String path) throws IOException 
-	{
-	    byte[] encoded = Files.readAllBytes(Paths.get(path));
-	    
-	    return encoded;
 	}
 }
