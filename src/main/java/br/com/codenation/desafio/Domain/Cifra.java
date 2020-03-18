@@ -1,53 +1,64 @@
 package br.com.codenation.desafio.Domain;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 
-import lombok.Getter;
-import lombok.Setter;
-@Getter
-@Setter
 public class Cifra {
 
-	@JsonProperty("numero_casas")
-	private int numeroCasas;
+	//@JsonProperty("numero_casas")
+	private int numero_casas;
 	
-	@JsonProperty("token")
+	//@JsonProperty("token")
 	private String token;
 	
-	@JsonProperty("cifrado")
+	//@JsonProperty("cifrado")
 	private String cifrado;
 	
-	@JsonProperty("decifrado")
+	//@JsonProperty("decifrado")
 	private String decifrado;
 	
-	@JsonProperty("resumo_criptografico")
-	private String resumoCriptografico;
-	
-	
-	public int getNumeroCasas() {
-		return numeroCasas;
+	//@JsonProperty("resumo_criptografico")
+	private String resumo_criptografico;
+
+	public int getNumero_casas() {
+		return numero_casas;
 	}
-	public void setNumeroCasas(int numeroCasas) {
-		this.numeroCasas = numeroCasas;
+
+	public void setNumero_casas(int numero_casas) {
+		this.numero_casas = numero_casas;
+	}
+
+	public String getToken() {
+		return token;
 	}
 
 	public void setToken(String token) {
 		this.token = token;
 	}
-	
+
 	public String getCifrado() {
 		return cifrado;
 	}
+
 	public void setCifrado(String cifrado) {
 		this.cifrado = cifrado;
 	}
-	
+
+	public String getDecifrado() {
+		return decifrado;
+	}
+
 	public void setDecifrado(String decifrado) {
 		this.decifrado = decifrado;
 	}
-	
-	public void setResumoCriptografico(String resumoCriptografico) {
-		this.resumoCriptografico = resumoCriptografico;
+
+	public String getResumo_criptografico() {
+		return resumo_criptografico;
 	}
+
+	public void setResumo_criptografico(String resumo_criptografico) {
+		this.resumo_criptografico = resumo_criptografico;
+	}
+	
+	
+	
 	
 }
